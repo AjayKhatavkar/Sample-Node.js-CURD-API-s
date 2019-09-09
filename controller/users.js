@@ -26,7 +26,7 @@ router.post("/add", (req, res, next) => {
                 message: "User added.",
                 Id: data.insertId
             });
-        }else{
+        } else {
             res.status(200).json({
                 message: user
             });
@@ -37,7 +37,7 @@ router.post("/add", (req, res, next) => {
 
 router.get("/:Id", (req, res, next) => {
     let uid = req.params.Id;
-  
+
     db.query(User.getUserByIdSQL(uid), (err, data) => {
         if (!err) {
             if (data && data.length > 0) {
@@ -60,7 +60,7 @@ router.put("/:Id", (req, res, next) => {
     var uid = req.params.Id;
     let user = new User(req.body);
 
-    db.query(User.updateUserByIdSQL(uid), (err, data) => {
+    db.query(user.updateUserByIdSQL(uid), (err, data) => {
         if (!err) {
             if (data && data.affectedRows > 0) {
                 res.status(200).json({
@@ -74,7 +74,7 @@ router.put("/:Id", (req, res, next) => {
             }
         }
     });
-});    
+});
 
 router.delete("/:Id", (req, res, next) => {
 
