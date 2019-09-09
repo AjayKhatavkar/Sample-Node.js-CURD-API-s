@@ -31,6 +31,12 @@ class User {
         return sql;           
     }
 
+    updateUserByIdSQL(Id) {
+        let sql = `UPDATE USERS SET (Name = '${this.Name}', Address = '${this.Address}', Country = '${this.Country}', Phone = '${this.Phone}', Email = '${this.Email}', Password = '${this.Password}``) \
+        WHERE Id = ${Id}`;
+        return sql;           
+    }
+
     static getAllUserSQL() {
         let sql = `SELECT * FROM USERS`;
         return sql;           

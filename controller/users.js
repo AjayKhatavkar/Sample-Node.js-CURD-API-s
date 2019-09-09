@@ -35,7 +35,6 @@ router.post("/add", (req, res, next) => {
 });
 
 
-
 router.get("/:Id", (req, res, next) => {
     let uid = req.params.Id;
   
@@ -44,7 +43,7 @@ router.get("/:Id", (req, res, next) => {
             if (data && data.length > 0) {
 
                 res.status(200).json({
-                    message: "User found",
+                    message: "User Record Found..",
                     user: data
                 });
             } else {
@@ -56,11 +55,30 @@ router.get("/:Id", (req, res, next) => {
     });
 });
 
+router.put("/:Id", (req, res, next) => {
 
+    var uid = req.params.Id;
+    let user = new User(req.body);
 
-router.post("/delete", (req, res, next) => {
+    db.query(User.updateUserByIdSQL(uid), (err, data) => {
+        if (!err) {
+            if (data && data.affectedRows > 0) {
+                res.status(200).json({
+                    message: `User updated`,
+                    affectedRows: data.affectedRows
+                });
+            } else {
+                res.status(200).json({
+                    message: "User Not updated."
+                });
+            }
+        }
+    });
+});    
 
-    var uid = req.body.Id;
+router.delete("/:Id", (req, res, next) => {
+
+    var uid = req.params.Id;
 
     db.query(User.deleteUserByIdSQL(uid), (err, data) => {
         if (!err) {
