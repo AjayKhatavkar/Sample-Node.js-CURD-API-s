@@ -18,10 +18,10 @@ router.post("/login", (req, res, next) => {
                 expiresIn:600   // expires in 10 minutes
             });
             data[0].token = token
-            res.status(200).send({ auth: true, data: data[0] });
+            res.status(200).send({ auth: true, data: data[0], message: "User Login Successful" });
         }else{
             res.status(200).json({
-                message: "unsuccessful"
+                message: "Invalid Email Id & Password"
             });
         }
     });
