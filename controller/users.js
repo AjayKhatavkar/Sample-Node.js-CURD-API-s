@@ -9,7 +9,7 @@ router.get("/", (req, res, next) => {
     db.query(User.getAllUserSQL(), (err, data) => {
         if (!err) {
             res.status(200).json({
-                message: "Users listed.",
+                message: "All Users list",
                 Userdata: data
             });
         }
@@ -23,12 +23,12 @@ router.post("/add", (req, res, next) => {
     db.query(user.addUserSQL(), (err, data) => {
         if (!err) {
             res.status(200).json({
-                message: "User added.",
+                message: "User added",
                 Id: data.insertId
             });
         } else {
             res.status(200).json({
-                message: user
+                message: "user not added"
             });
         }
     });
@@ -43,7 +43,7 @@ router.get("/:Id", (req, res, next) => {
             if (data && data.length > 0) {
 
                 res.status(200).json({
-                    message: "User Record Found..",
+                    message: "User Record Found",
                     user: data
                 });
             } else {
@@ -89,7 +89,7 @@ router.delete("/:Id", (req, res, next) => {
                 });
             } else {
                 res.status(200).json({
-                    message: "User Not found."
+                    message: "User Not found"
                 });
             }
         }
