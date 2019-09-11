@@ -14,7 +14,7 @@ router.post("/login", (req, res, next) => {
             if (data && data.length > 0) {
                 var Id = data[0].Id;
                 var token = jwt.sign({ id: Id }, config.secret, {
-                    expiresIn: 600   // expires in 10 minutes
+                    expiresIn: 6000 
                 });
                 data[0].token = token
                 res.status(200).send({ auth: true, data: data[0], message: "User Login Successful" });

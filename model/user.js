@@ -22,7 +22,7 @@ class User {
     }
 
     static getUserByIdSQL(Id) {
-        let sql = `SELECT * FROM USERS WHERE Id = ${Id}`;
+        let sql = `SELECT Id,Name,Address,Country,Phone,Email,Password FROM USERS WHERE Id = ${Id}`;
         return sql;
     }
 
@@ -45,7 +45,7 @@ class User {
     }
 
     static getAllUserSQL() {
-        let sql = `SELECT * FROM USERS`;
+        let sql = `SELECT Id,Name,Address,Country,Phone,Email,Password FROM USERS`;
         return sql;
     }
 }

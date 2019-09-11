@@ -1,19 +1,24 @@
 import express from "express";
 import db from "../db/database";
 import User from "../model/user";
+import { verifyToken } from "../config/verifyJwtToken"
 
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
 
-    db.query(User.getAllUserSQL(), (err, data) => {
-        if (!err) {
-            res.status(200).json({
-                message: "All Users list",
-                Userdata: data
-            });
-        }
-    });
+    verifyToken(req, res, Id => {
+
+        db.query(User.getAllUserSQL(), (err, data) => {
+            if (!err) {
+                res.status(200).json({
+                    userData: data,
+                    message: "All Users list"
+                });
+            }
+        });
+    })
+
 });
 
 
@@ -36,23 +41,26 @@ router.post("/add", (req, res, next) => {
 
 
 router.get("/:Id", (req, res, next) => {
-    let uid = req.params.Id;
 
-    db.query(User.getUserByIdSQL(uid), (err, data) => {
-        if (!err) {
-            if (data && data.length > 0) {
+    verifyToken(req, res, Id => {
+        let uid = req.params.Id;
 
-                res.status(200).json({
-                    message: "User Record Found",
-                    user: data
-                });
-            } else {
-                res.status(200).json({
-                    message: "User Not found."
-                });
+        db.query(User.getUserByIdSQL(uid), (err, data) => {
+            if (!err) {
+                if (data && data.length > 0) {
+
+                    res.status(200).json({
+                        user: data,
+                        message: "User Record Found"
+                    });
+                } else {
+                    res.status(200).json({
+                        message: "User Not found."
+                    });
+                }
             }
-        }
-    });
+        });
+    })
 });
 
 router.put("/:Id", (req, res, next) => {
