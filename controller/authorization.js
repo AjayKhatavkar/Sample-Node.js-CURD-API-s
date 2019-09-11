@@ -25,11 +25,10 @@ router.post("/login", (req, res, next) => {
                 });
             }
         }
-        else
-        {
+        else {
             res.status(200).json({
                 message: "User Not Found"
-            }); 
+            });
         }
     });
 });
