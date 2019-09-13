@@ -40,18 +40,40 @@ router.post("/add", (req, res, next) => {
 });
 
 
-router.get("/:Id", (req, res, next) => {
+// router.get("/:Id", (req, res, next) => {
+
+//     verifyToken(req, res, Id => {
+//         let uid = req.params.Id;
+
+//         db.query(User.getUserByIdSQL(uid), (err, data) => {
+//             if (!err) {
+//                 if (data && data.length > 0) {
+
+//                     res.status(200).json({
+//                         user: data,
+//                         message: "User Record Found"
+//                     });
+//                 } else {
+//                     res.status(200).json({
+//                         message: "User Not found."
+//                     });
+//                 }
+//             }
+//         });
+//     })
+// });
+
+router.get("/view_user_profile", (req, res, next) => {
 
     verifyToken(req, res, Id => {
-        let uid = req.params.Id;
+        let uid = Id;
 
         db.query(User.getUserByIdSQL(uid), (err, data) => {
             if (!err) {
                 if (data && data.length > 0) {
 
                     res.status(200).json({
-                        user: data,
-                        message: "User Record Found"
+                        user: data
                     });
                 } else {
                     res.status(200).json({
