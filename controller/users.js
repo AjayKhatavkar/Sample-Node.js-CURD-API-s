@@ -73,7 +73,7 @@ router.get("/view_user_profile", (req, res, next) => {
                 if (data && data.length > 0) {
 
                     res.status(200).json({
-                        user: data
+                        userData: data
                     });
                 } else {
                     res.status(200).json({
